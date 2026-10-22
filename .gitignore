@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+# Built releases and variant workspaces live here but are not tracked.
+Releases/*
+!Releases/README.md
+Branches/*
+!Branches/README.md
+.claude/*.lock
+.claude/

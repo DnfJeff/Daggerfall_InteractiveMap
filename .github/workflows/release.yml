@@ -1,0 +1,50 @@
+# Builds the portable desktop app (one .exe, map data built in) and attaches it to a GitHub release.
+# Trigger: push a tag like v0.3.0 (or run manually with a tag name).
+name: Desktop release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag (e.g. v0.3.0)
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - run: npm ci
+      - name: Build exe
+        run: npx tauri build --no-bundle
+        env:
+          VITE_REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+      - name: Package
+        shell: pwsh
+        run: |
+          $tag = if ('${{ github.event.inputs.tag }}') { '${{ github.event.inputs.tag }}' } else { '${{ github.ref_name }}' }
+          $name = "DaggerfallInteractiveMap-$($tag.TrimStart('v'))-windows"
+          New-Item -ItemType Directory $name | Out-Null
+          Copy-Item src-tauri/target/release/daggerfall-interactive-map.exe "$name/Daggerfall Interactive Map.exe"
+          (Get-Content release/README.txt -Raw).Replace('{{VERSION}}', "$tag ($(git rev-parse --short HEAD))") | Set-Content "$name/README.txt"
+          Compress-Archive $name "$name.zip"
+          "ZIP=$name.zip" >> $env:GITHUB_ENV
+          "TAG=$tag" >> $env:GITHUB_ENV
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          files: ${{ env.ZIP }}
+          generate_release_notes: true
