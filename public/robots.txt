@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dnfjeff.github.io/Daggerfall_InteractiveMap/sitemap.xml
