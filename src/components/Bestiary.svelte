@@ -145,7 +145,7 @@
   .seg .on { color: var(--gold); border-color: var(--gold-dim); }
   .lvl { width: 56px; }
   .banner { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 13px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 10px; }
   .creature { display: flex; flex-direction: column; gap: 8px; }
   .creature.slain { border-color: #3f5a3c; }
   .creature.sel { border-color: var(--gold-dim); }

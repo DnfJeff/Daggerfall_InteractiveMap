@@ -15,7 +15,7 @@
 
   function pick(tab: DockTab) {
     if (L.bottomOpen && L.bottomTab === tab) L.bottomOpen = false;
-    else { L.bottomTab = tab; L.bottomOpen = true; }
+    else { app.openDock(tab); return; }
     app.saveLayout();
   }
 </script>
@@ -28,10 +28,12 @@
       </button>
     {/each}
     <span class="spacer"></span>
-    {#if L.bottomOpen}
+    {#if L.bottomOpen && !app.phone}
       <button class="ghost icon" title={L.bottomMax ? 'Restore (show map)' : 'Maximise'} onclick={() => { L.bottomMax = !L.bottomMax; app.saveLayout(); }}>
         <Icon name={L.bottomMax ? 'down' : 'up'} size={15} />
       </button>
+    {/if}
+    {#if L.bottomOpen}
       <button class="ghost icon" title="Close dock (`)" onclick={() => { L.bottomOpen = false; L.bottomMax = false; app.saveLayout(); }}><Icon name="close" size={15} /></button>
     {:else}
       <button class="ghost icon" title="Open dock (`)" onclick={() => { L.bottomOpen = true; app.saveLayout(); }}><Icon name="up" size={15} /></button>

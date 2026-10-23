@@ -60,7 +60,11 @@
 </div>
 
 <style>
-  .fm { position: relative; }
+  .fm { position: relative; flex: none; }
+  @media (max-width: 639px) {
+    .nm { display: none; }
+    .menu { position: fixed; top: 48px; right: 6px; width: min(320px, calc(100vw - 12px)); }
+  }
   .trigger { display: flex; align-items: center; gap: 6px; max-width: 220px; }
   .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); flex: none; }

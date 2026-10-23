@@ -105,7 +105,7 @@
 </div>
 
 <style>
-  .page { position: absolute; inset: 0; overflow: auto; padding: 14px 18px 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px; align-content: start; }
+  .page { position: absolute; inset: 0; overflow: auto; padding: 14px 18px 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 12px; align-content: start; }
   .small { font-size: 12.5px; }
   .presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0; }
   @media (max-width: 760px) { .presets { grid-template-columns: 1fr; } }
@@ -114,7 +114,7 @@
   .preset small { display: block; color: var(--muted); font-size: 12px; line-height: 1.3; }
   .preset strong { display: block; }
   .preset.active strong { color: var(--gold); }
-  .overrides { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px 14px; margin-top: 8px; }
+  .overrides { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 10px 14px; margin-top: 8px; }
   .overrides label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
   .overrides label.check { flex-direction: row; align-items: center; grid-column: 1 / -1; color: var(--text); }
   .mods { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }

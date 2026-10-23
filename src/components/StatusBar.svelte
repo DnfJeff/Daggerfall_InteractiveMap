@@ -27,7 +27,7 @@
     {/if}
   </button>
 
-  <span class="seg" title="Save the active profile reads">
+  <span class="seg save-seg" title="Save the active profile reads">
     {#if bound}
       <span class="muted">{bound.runtime === 'dfo' ? 'DFO' : 'DFU'}:</span> {bound.characterName} · <span class="mono">{bound.folder}</span>
       <span class="faint">({formatGameTime(bound.gameTime)})</span>
@@ -51,12 +51,12 @@
 
   {#if !app.storage.persisted && !app.desktop}
     <button class="seg warnbtn" onclick={() => app.openDock('data')} title="Storage may be cleared by the browser — open Data to fix">
-      <Icon name="shield" size={14} /> Not persistent
+      <Icon name="shield" size={14} /> <span class="wtext">Not persistent</span>
     </button>
   {/if}
 
   {#if app.dataMode === 'files' || app.sources.dfuSaves.state === 'ok' || app.sources.dfoSaves.state === 'ok'}
-  <button class="seg" onclick={refreshAll} title="Re-read game data and saves"><Icon name="refresh" size={14} /> Refresh</button>
+  <button class="seg refresh" onclick={refreshAll} title="Re-read game data and saves"><Icon name="refresh" size={14} /> Refresh</button>
   {/if}
 </div>
 
@@ -72,4 +72,9 @@
   select { background: transparent; border: 0; padding: 0 2px; color: var(--gold); font-weight: 600; }
   .warn { color: var(--warn); }
   .warnbtn { color: var(--warn); }
+  @media (max-width: 639px) {
+    .bar { font-size: 12px; padding: 0 2px; }
+    .seg { padding: 0 6px; }
+    .save-seg, .refresh, .warnbtn .wtext { display: none; }
+  }
 </style>

@@ -170,6 +170,13 @@
 
 <style>
   .find { position: relative; display: flex; align-items: center; gap: 6px; width: min(460px, 48vw); color: var(--muted); }
+  @media (max-width: 899px) { .find { flex: 1; width: auto; min-width: 0; } }
+  @media (max-width: 639px) {
+    .find :global(svg) { display: none; }
+    .results { position: fixed; top: 48px; left: 6px; right: 6px; max-height: calc(100dvh - 150px); }
+    .ctx { display: none; }
+    .svc-head { font-size: 12px; }
+  }
   input { flex: 1; min-width: 0; }
   .results {
     position: absolute; top: calc(100% + 6px); left: 0; right: -60px; max-height: 64vh; overflow: auto;

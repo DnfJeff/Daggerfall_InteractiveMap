@@ -103,6 +103,12 @@ class AppState {
   mapLevel = $state<MapLevel>('overview');
   /** Current world-map zoom (screen px per map pixel), published by the map for the controls panel. */
   mapZoom = $state(1);
+  /** Window width, kept current by the workspace. Narrow: side panels become a drawer. Phone: compact layout. */
+  viewportWidth = $state(typeof window !== 'undefined' ? innerWidth : 1280);
+  narrow = $derived(this.viewportWidth < 900);
+  phone = $derived(this.viewportWidth < 640);
+  /** On narrow screens the side panels are a drawer, shown on demand (not a saved layout setting). */
+  drawerOpen = $state(false);
   /** Bestiary "where" filter: a habitat key ('dungeon:0', 'wild:woodland:wild-day', …) or 'region:<n>'. */
   bestiaryWhere = $state<string | null>(null);
   /** A pending "services near X" query for the find box. */
@@ -820,6 +826,7 @@ class AppState {
     const l = this.settings.layout;
     l.bottomTab = tab;
     l.bottomOpen = true;
+    if (this.phone) { l.bottomMax = true; this.drawerOpen = false; }
     this.saveLayout();
   }
 

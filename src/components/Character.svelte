@@ -90,7 +90,7 @@
   header { margin-bottom: 14px; gap: 10px; }
   .small { font-size: 12.5px; }
   .empty-state { max-width: 460px; margin: 10vh auto; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; align-items: start; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 12px; align-items: start; }
   .shot { width: 100%; border-radius: 6px; border: 1px solid var(--line); }
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 16px; margin-top: 8px; }
   .stat { display: grid; grid-template-columns: 40px 1fr; align-items: center; position: relative; padding-bottom: 5px; }

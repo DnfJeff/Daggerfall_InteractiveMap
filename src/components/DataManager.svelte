@@ -222,7 +222,7 @@
 <style>
   .page { position: absolute; inset: 0; overflow: auto; padding: 12px 16px 30px; display: flex; flex-direction: column; gap: 12px; }
   .lead { margin: 0; max-width: 820px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; align-items: start; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; align-items: start; }
   .small { font-size: 12.5px; }
   .ok { color: var(--ok); }
   .warn { color: var(--warn); }

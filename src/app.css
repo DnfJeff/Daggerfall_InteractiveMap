@@ -28,6 +28,8 @@
 
 * { box-sizing: border-box; }
 html, body, #app { height: 100%; margin: 0; }
+/* Phones: size to the visible area, not behind the browser's own bars. */
+@supports (height: 100dvh) { html, body, #app { height: 100dvh; } }
 body {
   background: var(--bg);
   color: var(--text);
@@ -124,6 +126,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; }
   box-shadow: var(--shadow);
   width: min(560px, calc(100vw - 32px));
   max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
   display: flex; flex-direction: column;
 }
 .modal header { padding: 14px 16px 10px; border-bottom: 1px solid var(--line-soft); display: flex; align-items: center; gap: 8px; }

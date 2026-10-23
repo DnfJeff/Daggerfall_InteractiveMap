@@ -307,4 +307,7 @@
   .zoom { position: absolute; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 4px; }
   .zoom button { width: 32px; height: 32px; padding: 0; font-size: 16px; }
   @media (max-width: 1200px) { .legend .place { display: none; } }
+  @media (max-width: 639px) {
+    .legend { left: 8px; right: 56px; transform: none; bottom: 8px; flex-wrap: wrap; gap: 4px 10px; white-space: normal; border-radius: 10px; padding: 5px 10px; font-size: 11.5px; }
+  }
 </style>

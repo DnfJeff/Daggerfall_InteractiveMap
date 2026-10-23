@@ -158,7 +158,7 @@
   }
 
   function dotSize(l: LocationSummary, base: number) {
-    return Math.min(Math.max(cam.z, 3), base * (dotScale.get(l) ?? 1));
+    return Math.min(Math.max(cam.z, app.phone ? 1.6 : 3), base * (dotScale.get(l) ?? 1));
   }
 
   function draw() {
@@ -236,7 +236,9 @@
     ctx.restore();
 
     // Location dots (screen space so they stay crisp).
-    const base = Math.max(3, Math.min(z * 0.62, 10));
+    // Phones show the whole bay in ~350 px, so their dots may get smaller than desktop's 3 px floor.
+    const minDot = app.phone ? 1.6 : 3;
+    const base = Math.max(minDot, Math.min(z * 0.62, 10));
     const deep = z >= TOWN_ZOOM;
     for (const l of visibleLocs) {
       if (!inView(l)) continue;

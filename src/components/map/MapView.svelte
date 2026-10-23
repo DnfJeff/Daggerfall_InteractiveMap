@@ -28,8 +28,8 @@
     <FindBox />
     <span class="spacer"></span>
     <FileMenu />
-    {#if !app.settings.layout.rightOpen}
-      <button class="small" onclick={() => { app.settings.layout.rightOpen = true; app.saveLayout(); }} title="Inspector & map controls ( ] )"><Icon name="panel" size={15} /> Panels</button>
+    {#if app.narrow ? !app.drawerOpen : !app.settings.layout.rightOpen}
+      <button class="small panels" onclick={() => { if (app.narrow) app.drawerOpen = true; else { app.settings.layout.rightOpen = true; app.saveLayout(); } }} title="Inspector & map controls ( ] )"><Icon name="panel" size={15} /><span>Panels</span></button>
     {/if}
   </div>
 
@@ -65,4 +65,16 @@
   .stage { flex: 1; position: relative; min-height: 0; }
   .empty-state { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); }
   .back { position: absolute; left: 12px; bottom: 12px; z-index: 4; display: flex; align-items: center; gap: 4px; }
+  .panels { display: flex; align-items: center; gap: 5px; }
+  /* Narrow screens: the search box gets the room; crumbs and labels shrink to essentials. */
+  @media (max-width: 899px) {
+    .top { gap: 6px; padding: 6px 8px; }
+    .crumbs button:not(.here) { display: none; }
+    .crumbs .sep { display: none; }
+  }
+  @media (max-width: 639px) {
+    .top .spacer { display: none; }
+    .panels { display: none; }
+    .back { bottom: 52px; }
+  }
 </style>
